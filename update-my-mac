@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# update mac os for 
+# - packages installed by brew
+# - packages installed by mas
+# - packages installed by mac os system
+
+## brew
+echo -e "---\033[0;32m brew: update package reference \033[0m---"
+brew update
+echo -e "---\033[0;32m brew: update packages \033[0m---"
+brew upgrade
+echo -e "---\033[0;32m brew: upgrade packages \033[0m---"
+reinstallme=`brew outdated --cask | awk '{print $1}'`
+for i in $reinstallme; do brew cask reinstall $i; done
+echo -e "---\033[0;32m brew: cleanup old packages \033[0m---"
+brew cleanup
+
+## mas
+echo -e "---\033[0;32m mas: list outdated mac app store packages \033[0m---"
+mas outdated
+echo -e "---\033[0;32m mas: upgrade outdated mac app store packages \033[0m---"
+mas upgrade
+
+## mac os 
+echo -e "---\033[0;32m system: check for mac OS updates \033[0m---"
+softwareupdate -l 
