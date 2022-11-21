@@ -11,8 +11,8 @@ brew update
 echo -e "---\033[0;32m brew: update packages \033[0m---"
 brew upgrade
 echo -e "---\033[0;32m brew: upgrade packages \033[0m---"
-reinstallme=`brew outdated --cask | awk '{print $1}'`
-for i in $reinstallme; do brew cask reinstall $i; done
+reinstallme=$(brew outdated --cask | awk '{print $1}')
+for i in $reinstallme; do brew cask reinstall "$i"; done
 echo -e "---\033[0;32m brew: cleanup old packages \033[0m---"
 brew cleanup
 
